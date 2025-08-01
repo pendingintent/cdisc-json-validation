@@ -1,0 +1,5 @@
+**/__pycahce__/
+.venv/
+venv/
+.vscode
+.env
