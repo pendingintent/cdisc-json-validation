@@ -3,10 +3,15 @@ This utility will validate a USDM JSON study design file against the USDM schema
 
 ## To convert a YAML schema into JSON ##
 ```
-/Users/dmoreland/projects/cdisc-json-validation/venv/bin/python convert.py schema/USDM_API_v3.11.0.yaml -o output.json
+python convert.py schema/USDM_API_v3.11.0.yaml -o schema/USDM_API_v3.11.0.json
 ```
 
-## To validate a USDM JSON file againt the schema ##
+## To validate a USDM JSON file with the version 4.0.0 schema ##
 ```
-/Users/dmoreland/projects/cdisc-json-validation/venv/bin/python convert.py validate usdm-json/te.json
+python validate.py usdm-json/te.json
+```
+
+## To validate a USDM JSON file with the version 3.11.0 schema ##
+```
+python validate.py usdm-json/te.json --schema-version v3
 ```
