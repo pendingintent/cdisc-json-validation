@@ -15,3 +15,15 @@ python validate.py usdm-json/te.json
 ```
 python validate.py usdm-json/te.json --schema-version v3
 ```
+
+## To validate against a specific schema file and schema name ##
+```
+python validate.py usdm-json/te.json --schema-file path/to/schema.json --schema-name Wrapper-Input
+```
+
+### Usage Note
+You can use `--schema-file` to specify any OpenAPI JSON or YAML schema file, and `--schema-name` to select the schema object within that file. This allows validation against custom or alternate USDM schema files.
+
+### Schema Files
+All USDM API files contained in the schema directory are from the DDF github repository https://github.com/cdisc-org/DDF-RA
+

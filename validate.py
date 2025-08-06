@@ -56,7 +56,19 @@ def validate_json_with_schema(json_path, schema_path=None, openapi_doc=None, ent
         sys.exit(1)
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Validate a JSON file against a USDM schema (v4 default).")
+    parser = argparse.ArgumentParser(
+        description="Validate a JSON file against a USDM schema (v4 default).",
+        epilog="""
+Examples:
+  python validate.py my_usdm.json --schema-version v3
+  python validate.py my_usdm.json --schema-file schema/USDM_API_v4.0.0.json --schema-name Wrapper-Input
+
+Usage notes:
+  --schema-file allows you to specify any OpenAPI JSON or YAML schema file.
+  --schema-name selects the schema object within the file (default: Wrapper-Input).
+""",
+        formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument(
         "json_file",
         type=str,
@@ -89,7 +101,7 @@ if __name__ == "__main__":
     elif args.schema_version == "v4":
         schema_file = "schema/USDM_API_v4.0.0.json"
     else:
-        schema_file = "schema/USDM_API_v3.11.0.yaml"
+        schema_file = "schema/USDM_API_v3.13.0.json"
     if schema_file.endswith(".json") or schema_file.endswith(".yaml") or schema_file.endswith(".yml"):
         openapi_doc, entry_schema = load_openapi_and_entry_schema(schema_file, args.schema_name)
         validate_json_with_schema(args.json_file, openapi_doc=openapi_doc, entry_schema=entry_schema, schema_name=args.schema_name)
