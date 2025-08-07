@@ -1,6 +1,6 @@
 # Validate USDM JSON file against USDM schema #
 This utility will validate a USDM JSON study design file against a USDM schema.
-If the user does not specify a particular JSON schema file against which to test, versin 4.0 is the default version
+If the user does not specify a particular JSON schema file against which to test, version 4.0 is the default version
 used by the utility.
 
 ## To convert a YAML schema into JSON ##
