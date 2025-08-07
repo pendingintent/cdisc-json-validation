@@ -1,5 +1,7 @@
-# Validate USDM JSON file against USDM v3.x or v4.x schema #
-This utility will validate a USDM JSON study design file against the USDM schema version 3.11.0 or 4.0.0
+# Validate USDM JSON file against USDM schema #
+This utility will validate a USDM JSON study design file against a USDM schema.
+If the user does not specify a particular JSON schema file against which to test, version 4.0 is the default version
+used by the utility.
 
 ## To convert a YAML schema into JSON ##
 ```
@@ -11,7 +13,7 @@ python convert.py schema/USDM_API_v3.11.0.yaml -o schema/USDM_API_v3.11.0.json
 python validate.py usdm-json/te.json
 ```
 
-## To validate a USDM JSON file with the version 3.11.0 schema ##
+## To validate a USDM JSON file with the version 3.13.0 schema ##
 ```
 python validate.py usdm-json/te.json --schema-version v3
 ```
