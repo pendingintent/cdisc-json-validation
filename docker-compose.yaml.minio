@@ -15,23 +15,8 @@ services:
     networks:
       - cdisc-net
 
-  jupyter:
-    image: quay.io/jupyter/base-notebook
-    build:
-      context: .
-    container_name: notebook
-    ports:
-      - "8888:8888"
-    environment:
-      - AWS_ACCESS_KEY_ID=admin
-      - AWS_SECRET_ACCESS_KEY=password
-    command: start-notebook.py --NotebookApp.token='b8f50287d0b2c077e9fd6d342aa011af7dfeecf79fa19ab0'
-    networks:
-      - cdisc-net
-
 volumes:
   minio-data:
-
 
 networks:
   cdisc-net:

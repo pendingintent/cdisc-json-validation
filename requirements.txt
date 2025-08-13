@@ -1,6 +1,17 @@
 attrs==25.3.0
+black==25.1.0
+click==8.2.1
+flake8==7.3.0
 jsonschema==4.25.0
 jsonschema-specifications==2025.4.1
+mccabe==0.7.0
+mypy_extensions==1.1.0
+packaging==25.0
+pathspec==0.12.1
+platformdirs==4.3.8
+Prettifier==0.1
+pycodestyle==2.14.0
+pyflakes==3.4.0
 PyYAML==6.0.2
 referencing==0.36.2
 rpds-py==0.26.0

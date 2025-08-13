@@ -1,7 +1,13 @@
 services:
   jupyter:
-    build: .
+    build:
+      context: .
     ports:
-      - "8888:8888"
+      - 8888:8888
     volumes:
-      - .:/notebook
+      - jupyter-data:/notebook
+    command: start-notebook.py --NotebookApp.token='my-token'
+
+volumes:
+  jupyter-data:
+    name: jupyter-data
