@@ -3,3 +3,5 @@
 venv/
 .vscode
 .env
+.DS_Store/
+docker-compose.yaml.*

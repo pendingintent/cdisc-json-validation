@@ -1,0 +1,17 @@
+services:
+  jupyter:
+    build:
+      context: .
+    ports:
+      - 8888:8888
+    volumes:
+      - jupyter-data:/work
+    command: start-notebook.py --NotebookApp.token='my-token'
+    networks:
+      - cdisc-net
+
+volumes:
+  jupyter-data:
+
+networks:
+  cdisc-net:

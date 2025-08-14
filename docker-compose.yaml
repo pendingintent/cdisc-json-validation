@@ -1,0 +1,36 @@
+services:
+  jupyter:
+    build:
+      context: .
+    ports:
+      - 8888:8888
+    volumes:
+      - jupyter-data:/notebook
+    networks:
+      - cdisc-net
+    command: start-notebook.py --NotebookApp.token='my-token'
+
+  minio:
+    image: quay.io/minio/minio
+    container_name: minio
+    command: server /data --console-address ":9001"
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=password
+      - MINO_REGION=us-east-1
+    volumes:
+      - minio-data:/data
+    networks:
+      - cdisc-net
+
+networks:
+  cdisc-net:
+
+volumes:
+  jupyter-data:
+    name: jupyter-data
+  minio-data:
+    name: minio-data
