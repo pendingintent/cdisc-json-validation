@@ -38,7 +38,12 @@ From the ./cdisc-json-validation directory, run:
 docker compose up --build
 ```
 
-Accesss the Jupyter Lab environment
+Access the Jupyter Lab environment
 ```
 http://localhost:8888/lab?token=my-token
+```
+
+Access the Minio administration page
+```
+http://localhost:9000
 ```
