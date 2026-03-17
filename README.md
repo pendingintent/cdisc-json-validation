@@ -29,21 +29,3 @@ You can use `--schema-file` to specify any OpenAPI JSON or YAML schema file, and
 ### Schema Files
 All USDM API files contained in the schema directory are from the DDF github repository https://github.com/cdisc-org/DDF-RA
 
-
-# Using Docker #
-A docker compose file exists to create a Jupyter Lab environment.
-
-From the ./cdisc-json-validation directory, run:
-```
-docker compose up --build
-```
-
-Access the Jupyter Lab environment
-```
-http://localhost:8888/lab?token=my-token
-```
-
-Access the Minio administration page
-```
-http://localhost:9000
-```
