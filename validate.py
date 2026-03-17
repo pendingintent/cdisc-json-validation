@@ -117,21 +117,37 @@ def validate_json_with_schema(
     path_line_map = build_path_line_map(json_text)
 
     def resolve_ref(schema):
-        """If schema is a $ref, walk openapi_doc to return the referenced schema."""
+        """If schema is a $ref, walk openapi_doc to return the referenced schema.
+
+        When openapi_doc is None (e.g., schema_path-based validation), this
+        function becomes a no-op and returns the original schema.
+        """
         if not (isinstance(schema, dict) and "$ref" in schema):
             return schema
         ref = schema["$ref"]
+        # Only resolve local references into the loaded OpenAPI document
         if not ref.startswith("#/"):
+            return schema
+        # If we don't have an OpenAPI document to resolve against, leave as-is
+        if openapi_doc is None:
             return schema
         parts = ref[2:].split("/")
         node = openapi_doc
-        for part in parts:
-            node = node[part]
+        try:
+            for part in parts:
+                node = node[part]
+        except (TypeError, KeyError):
+            # If traversal fails for any reason, fall back to the original schema
+            return schema
         return node
 
     def is_wrong_branch(error, instance_type):
         """Return True if this context error belongs to a different anyOf branch."""
         schema = resolve_ref(error.schema)
+        if not isinstance(schema, dict):
+            # If the resolved schema is not a dict, we can't inspect properties;
+            # treat this as not being definitively the wrong branch.
+            return False
         # The branch-level required/properties schema has instanceType.const set
         it_const = schema.get("properties", {}).get("instanceType", {}).get("const")
         if it_const is not None and it_const != instance_type:
