@@ -9,6 +9,7 @@ mypy_extensions==1.1.0
 packaging==25.0
 pathspec==0.12.1
 platformdirs==4.3.8
+openpyxl==3.1.5
 Prettifier==0.1
 pycodestyle==2.14.0
 pyflakes==3.4.0
