@@ -3,7 +3,6 @@ import yaml
 import json
 import sys
 import argparse
-from pathlib import Path
 import jsonschema
 from jsonschema import exceptions as jsonschema_exceptions
 import openpyxl
@@ -107,8 +106,12 @@ def write_xlsx(errors, output_path):
 
 
 def validate_json_with_schema(
-    json_path, schema_path=None, openapi_doc=None, entry_schema=None, schema_name=None,
-    output_file=None
+    json_path,
+    schema_path=None,
+    openapi_doc=None,
+    entry_schema=None,
+    schema_name=None,
+    output_file=None,
 ):
 
     with open(json_path, "r", encoding="utf-8") as jf:
@@ -153,9 +156,11 @@ def validate_json_with_schema(
         if it_const is not None and it_const != instance_type:
             return True
         # Discriminator const/enum failure: instanceType value rejected by the wrong branch
-        if (error.validator in ("const", "enum")
-                and error.absolute_path
-                and error.absolute_path[-1] == "instanceType"):
+        if (
+            error.validator in ("const", "enum")
+            and error.absolute_path
+            and error.absolute_path[-1] == "instanceType"
+        ):
             return True
         return False
 
@@ -182,12 +187,16 @@ def validate_json_with_schema(
 
     def run_validation(validator):
         try:
-            raw_errors = sorted(validator.iter_errors(data), key=lambda e: list(e.absolute_path))
+            raw_errors = sorted(
+                validator.iter_errors(data), key=lambda e: list(e.absolute_path)
+            )
         except jsonschema.SchemaError as se:
             print(f"Schema error: {se.message}")
             sys.exit(1)
         if not raw_errors:
-            print(f"Validation successful: {json_path} is valid against {schema_name or schema_path}.")
+            print(
+                f"Validation successful: {json_path} is valid against {schema_name or schema_path}."
+            )
             return
         collected = [collect_error(e) for e in raw_errors]
         for line_no, message, location, spath in collected:
@@ -288,4 +297,6 @@ Usage notes:
             output_file=args.output,
         )
     else:
-        validate_json_with_schema(args.json_file, schema_path=schema_file, output_file=args.output)
+        validate_json_with_schema(
+            args.json_file, schema_path=schema_file, output_file=args.output
+        )
